@@ -1,3 +1,5 @@
+using System;
+
 namespace Cake.IIS.Manager.Types
 {
     /// <summary>
@@ -29,6 +31,14 @@ namespace Cake.IIS.Manager.Types
         /// Defines whether to override current cofiguration
         /// </summary>
         public bool Overwrite { get; set; }
+
+        public ApplicationAuthentication? Authentication { get; set; }
         
+    }
+    [Flags]
+    public enum ApplicationAuthentication
+    {
+        Anonymous = 0x1,
+        Windows = 0x2
     }
 }

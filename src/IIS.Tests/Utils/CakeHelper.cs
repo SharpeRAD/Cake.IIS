@@ -74,7 +74,8 @@ namespace Cake.IIS.Tests.Utils
                 ApplicationPoolName = GetAppPoolSettings().Name,
                 Name = "Blog",
                 ParentWebSite = websiteSettings.Name,
-                PhysicalPath = Directory.GetCurrentDirectory()
+                PhysicalPath = Directory.GetCurrentDirectory(),
+                Authentication = ApplicationAuthentication.Windows
             };
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Configuration;
 using System.Text;
 using System.Threading.Tasks;
 using Cake.Core;
@@ -82,8 +83,32 @@ namespace Cake.IIS.Manager.Types
             if (!string.IsNullOrWhiteSpace(settings.ApplicationPoolName))
                 app.ApplicationPoolName = settings.ApplicationPoolName;
 
+            if (settings.Authentication.HasValue)
+            {
+                SetAuthentication(app, settings.ParentWebSite, settings.Authentication.Value);
+            }
+
             _Server.CommitChanges();
             _Log.Information("Virtual application created or updated '{0}'.", settings.Name);
+        }
+
+        private void SetAuthentication(Application application,string webSite, ApplicationAuthentication authentication)
+        {
+            SetAuthentication(application, webSite, "windowsAuthentication", (authentication & ApplicationAuthentication.Windows) > 0);
+            SetAuthentication(application, webSite, "anonymousAuthentication", (authentication & ApplicationAuthentication.Anonymous) > 0);
+        }
+
+        private void SetAuthentication(Application application, string webSite , string sectionName, bool value)
+        {
+            const string authenticationPrefix = "system.webServer/security/authentication/";
+            string configSection = authenticationPrefix + sectionName;
+
+            var configurationSection = _Server.GetApplicationHostConfiguration().GetSection(configSection, webSite + application.Path);
+            if (configurationSection != null)
+            {
+                configurationSection.SetAttributeValue("enabled", value);
+            }
+            else if(value) throw new InvalidOperationException("Server does not support this type '"+sectionName+"' authentication.");
         }
 
         /// <summary>
