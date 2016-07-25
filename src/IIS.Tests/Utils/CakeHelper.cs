@@ -5,6 +5,7 @@
     using System.Threading;
 
     using Cake.Core;
+    using Cake.IIS.Manager.Types;
     using Microsoft.Web.Administration;
 
     using NSubstitute;
@@ -65,9 +66,19 @@ namespace Cake.IIS.Tests.Utils
                 return manager;
             }
 
+        public static VirtualApplicationSettings GetVirtualAppSettings()
+        {
+            var websiteSettings = GetWebsiteSettings();
+            return new VirtualApplicationSettings()
+            {
+                ApplicationPoolName = GetAppPoolSettings().Name,
+                Name = "Blog",
+                ParentWebSite = websiteSettings.Name,
+                PhysicalPath = Directory.GetCurrentDirectory()
+            };
+        }
 
-
-            //Settings
+        //Settings
             public static ApplicationPoolSettings GetAppPoolSettings()
             {
                 return new ApplicationPoolSettings
@@ -300,5 +311,30 @@ namespace Cake.IIS.Tests.Utils
             }
 
         #endregion
+
+        public static void CreateVirtualApplication(VirtualApplicationSettings settings)
+        {
+            var manager = CakeHelper.CreateVirtualApplicationManager();
+
+            manager.Create(settings);
+        }
+
+        private static VirtualApplicationManager CreateVirtualApplicationManager()
+        {
+            var manager = new VirtualApplicationManager(CakeHelper.CreateEnvironment(), new DebugLog());
+            manager.SetServer();
+            return manager;
+        }
+
+        public static Application GetVirtualApplication(string webSite, string appName)
+        {
+            if (!appName.StartsWith("/"))
+                appName = "/" + appName;
+            using (var server = new ServerManager())
+            {
+                var site = server.Sites.FirstOrDefault(x => x.Name == webSite);
+                return site?.Applications.FirstOrDefault(x => x.Path == appName);
+            }
+        }
     }
 }
