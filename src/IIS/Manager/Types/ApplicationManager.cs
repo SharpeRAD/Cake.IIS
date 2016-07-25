@@ -27,7 +27,7 @@ namespace Cake.IIS.Manager.Types
         public void Create(VirtualApplicationSettings settings)
         {
             if(settings.ParentWebSite == null)
-                throw new ArgumentException("Parent virtual application needs to be set");
+                throw new ArgumentException("ParentWebSite needs to be set");
 
             if (settings.Name == null)
                 throw new ArgumentException("Name of virtual application needs to be set");
@@ -35,6 +35,9 @@ namespace Cake.IIS.Manager.Types
             var site = _Server.Sites.FirstOrDefault(x => x.Name == settings.ParentWebSite);
             if(site == null)
                 throw new ArgumentException("Site with name: " + settings.ParentWebSite + " was not found");
+
+            if (!settings.Name.StartsWith("/"))
+                settings.Name = "/" + settings.Name;
 
             var app = site.Applications.FirstOrDefault(x => x.Path == settings.Name);
             if (app != null)
@@ -47,13 +50,12 @@ namespace Cake.IIS.Manager.Types
             }
             else
             {
-                if (!settings.Name.StartsWith("/"))
-                    settings.Name = "/" + settings.Name;
+                _Log.Information("Creating or updating application: " + settings.Name);
 
                 var appDirectory = new DirectoryPath(settings.PhysicalPath);
                 var path = appDirectory.FullPath;
                 path = path.Replace(System.IO.Path.AltDirectorySeparatorChar, System.IO.Path.DirectorySeparatorChar);
-                app = site.Applications.Add("/" + settings.Name, path);
+                app = site.Applications.Add(settings.Name, path);
             }
             if (!String.IsNullOrWhiteSpace(settings.EnabledProtocols))
                 app.EnabledProtocols = settings.EnabledProtocols;
@@ -61,6 +63,7 @@ namespace Cake.IIS.Manager.Types
                 app.ApplicationPoolName = settings.ApplicationPoolName;
 
             _Server.CommitChanges();
+            _Log.Information("Virtual application created or updated.");
         }
 
         public bool Exists(string webSite, string appName)

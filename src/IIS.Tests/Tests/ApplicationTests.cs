@@ -19,5 +19,7 @@ namespace Cake.IIS.Tests
 
             Assert.NotNull(CakeHelper.GetVirtualApplication(appSettings.ParentWebSite, appSettings.Name));
         }
+
+        
     }
 }
