@@ -132,6 +132,16 @@ Task("Website-Start")
     StartSite("MyBlog");
 });
 
+Task("Create-Virtual-App")
+.Does(() =>
+{
+    CreateApplication("remote-server-name", new VirtualApplicationSettings() 
+    { 
+        Name = "Secret-Blog", 
+        ParentWebSite = "Blog",
+        PhysicalPath = "C:/Websites/Blog",
+    });
+});
 
 
 Task("WebFarm-Create")
