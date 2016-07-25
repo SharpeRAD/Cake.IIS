@@ -336,5 +336,12 @@ namespace Cake.IIS.Tests.Utils
                 return site?.Applications.FirstOrDefault(x => x.Path == appName);
             }
         }
+
+        public static void DeleteApplication(string parentWebSite, string name)
+        {
+            var manager = CakeHelper.CreateVirtualApplicationManager();
+
+            manager.Delete(parentWebSite, name);
+        }
     }
 }

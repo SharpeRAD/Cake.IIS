@@ -34,7 +34,7 @@ namespace Cake.IIS.Manager.Types
 
             var site = _Server.Sites.FirstOrDefault(x => x.Name == settings.ParentWebSite);
             if(site == null)
-                throw new ArgumentException("Site with name: " + settings.ParentWebSite + " was not found");
+                throw new ArgumentException("Site with name '" + settings.ParentWebSite + "' was not found");
 
             if (!settings.Name.StartsWith("/"))
                 settings.Name = "/" + settings.Name;
@@ -42,7 +42,7 @@ namespace Cake.IIS.Manager.Types
             var app = site.Applications.FirstOrDefault(x => x.Path == settings.Name);
             if (app != null)
             {
-                _Log.Information("Virtual application already created!");
+                _Log.Information("Virtual application '{0}' already created.", settings.Name);
                 if (!settings.Overwrite)
                 {
                     _Log.Information("Virtual application '{0}' will be overwriten.", settings.Name);
@@ -50,7 +50,7 @@ namespace Cake.IIS.Manager.Types
             }
             else
             {
-                _Log.Information("Creating or updating application: " + settings.Name);
+                _Log.Information("Creating or updating application: '{0}'." , settings.Name);
 
                 var appDirectory = new DirectoryPath(settings.PhysicalPath);
                 var path = appDirectory.FullPath;
@@ -63,15 +63,55 @@ namespace Cake.IIS.Manager.Types
                 app.ApplicationPoolName = settings.ApplicationPoolName;
 
             _Server.CommitChanges();
-            _Log.Information("Virtual application created or updated.");
+            _Log.Information("Virtual application created or updated '{0}'.", settings.Name);
         }
 
+        public void Delete(string webSite, string appName)
+        {
+            ValidateApplication(webSite, appName);
+
+            if (!appName.StartsWith("/"))
+                appName = "/" + appName;
+
+            var site = _Server.Sites.FirstOrDefault(x => x.Name == webSite);
+
+            var app = site?.Applications.FirstOrDefault(x => x.Path == appName);
+            if (app != null)
+            {
+                _Log.Information("Deleting virtual application '{0}' for website '{1}'", appName, webSite);
+                app.Delete();
+                _Server.CommitChanges();
+                _Log.Information("Application '{0}' in '{1} deleted", appName, webSite);
+            }
+            else throw new ArgumentException("Site or virtual application does not exists.");
+        }
+
+        /// <summary>
+        /// Checks whether the application exists
+        /// </summary>
+        /// <param name="webSite">Name of the web-site</param>
+        /// <param name="appName">Name of virtual application</param>
+        /// <returns></returns>
         public bool Exists(string webSite, string appName)
         {
+            ValidateApplication(webSite, appName);
+
+            if (!appName.StartsWith("/"))
+                appName = "/" + appName;
+
             var site = _Server.Sites.FirstOrDefault(x => x.Name == webSite);
 
             var app = site?.Applications.FirstOrDefault(x => x.Path == appName);
             return app != null;
+        }
+
+        private static void ValidateApplication(string webSite, string appName)
+        {
+            if (appName == null)
+                throw new ArgumentException("AppName cannot be null");
+
+            if (webSite == null)
+                throw new ArgumentException("WebSite cannot be null.");
         }
     }
 

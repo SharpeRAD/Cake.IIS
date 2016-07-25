@@ -34,6 +34,23 @@ namespace Cake.IIS.Aliases
         }
 
         /// <summary>
+        /// Deletes virtual application inside website
+        /// </summary>
+        /// <param name="context">The context</param>
+        /// <param name="server">IIS server</param>
+        /// <param name="webSite">Name of webSite</param>
+        /// <param name="appName">Name of virtual application</param>
+        [CakeMethodAlias]
+        public static void DeleteApplication(this ICakeContext context, string server, string webSite, string appName)
+        {
+            using (ServerManager manager = BaseManager.Connect(server))
+            {
+                VirtualApplicationManager.Using(context.Environment, context.Log, manager)
+                    .Delete(webSite,appName);
+            }
+        }
+
+        /// <summary>
         /// Checks if virtual application exists
         /// </summary>
         /// <param name="context">The context</param>
