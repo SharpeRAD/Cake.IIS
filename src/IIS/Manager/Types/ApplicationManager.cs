@@ -10,12 +10,27 @@ using Microsoft.Web.Administration;
 
 namespace Cake.IIS.Manager.Types
 {
+    /// <summary>
+    /// Class for managing virtual applications
+    /// </summary>
     public class VirtualApplicationManager : BaseManager
     {
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        /// <param name="environment">The environment</param>
+        /// <param name="log">The log</param>
         public VirtualApplicationManager(ICakeEnvironment environment, ICakeLog log) : base(environment, log)
         {
             
         }
+        /// <summary>
+        /// Creates a new instance of VirtualApplicationManager
+        /// </summary>
+        /// <param name="environment">The cake environment</param>
+        /// <param name="log">The log</param>
+        /// <param name="server">Remote IIS server</param>
+        /// <returns></returns>
         public static VirtualApplicationManager Using(ICakeEnvironment environment, ICakeLog log, ServerManager server)
         {
             VirtualApplicationManager manager = new VirtualApplicationManager(environment, log);
@@ -24,6 +39,11 @@ namespace Cake.IIS.Manager.Types
             return manager;
         }
 
+        /// <summary>
+        /// Creates virtual application
+        /// </summary>
+        /// <param name="settings">Settings for virtual application creation</param>
+        /// <exception cref="ArgumentException">When validation fails: Name of app is empty, website of app is empty or not found.</exception>
         public void Create(VirtualApplicationSettings settings)
         {
             if(settings.ParentWebSite == null)
@@ -66,6 +86,12 @@ namespace Cake.IIS.Manager.Types
             _Log.Information("Virtual application created or updated '{0}'.", settings.Name);
         }
 
+        /// <summary>
+        /// Deletes virtual application for a website
+        /// </summary>
+        /// <param name="webSite">The website</param>
+        /// <param name="appName">The virtual application</param>
+        /// <exception cref="ArgumentException"></exception>
         public void Delete(string webSite, string appName)
         {
             ValidateApplication(webSite, appName);
@@ -113,16 +139,5 @@ namespace Cake.IIS.Manager.Types
             if (webSite == null)
                 throw new ArgumentException("WebSite cannot be null.");
         }
-    }
-
-    public class VirtualApplicationSettings
-    {
-        public string Name { get; set; }
-        public string PhysicalPath { get; set; }
-        public string ParentWebSite { get; set; }
-        public string ApplicationPoolName { get; set; }
-        public string EnabledProtocols { get; set; }
-        public bool Overwrite { get; set; }
-        
     }
 }
