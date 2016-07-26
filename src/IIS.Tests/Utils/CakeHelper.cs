@@ -5,7 +5,7 @@
     using System.Threading;
 
     using Cake.Core;
-    using Cake.IIS.Manager.Types;
+    
     using Microsoft.Web.Administration;
 
     using NSubstitute;
@@ -66,18 +66,7 @@ namespace Cake.IIS.Tests.Utils
                 return manager;
             }
 
-        public static VirtualApplicationSettings GetVirtualAppSettings()
-        {
-            var websiteSettings = GetWebsiteSettings();
-            return new VirtualApplicationSettings()
-            {
-                ApplicationPoolName = GetAppPoolSettings().Name,
-                Name = "Blog",
-                ParentWebSite = websiteSettings.Name,
-                PhysicalPath = Directory.GetCurrentDirectory(),
-                Authentication = ApplicationAuthentication.Windows
-            };
-        }
+        
 
         //Settings
             public static ApplicationPoolSettings GetAppPoolSettings()
@@ -311,21 +300,7 @@ namespace Cake.IIS.Tests.Utils
                 }
             }
 
-        #endregion
-
-        public static void CreateVirtualApplication(VirtualApplicationSettings settings)
-        {
-            var manager = CakeHelper.CreateVirtualApplicationManager();
-
-            manager.Create(settings);
-        }
-
-        private static VirtualApplicationManager CreateVirtualApplicationManager()
-        {
-            var manager = new VirtualApplicationManager(CakeHelper.CreateEnvironment(), new DebugLog());
-            manager.SetServer();
-            return manager;
-        }
+        #endregion      
 
         public static Application GetVirtualApplication(string webSite, string appName)
         {
@@ -338,11 +313,22 @@ namespace Cake.IIS.Tests.Utils
             }
         }
 
-        public static void DeleteApplication(string parentWebSite, string name)
+        public static ApplicationSettings GetAppSettings()
         {
-            var manager = CakeHelper.CreateVirtualApplicationManager();
+            return new ApplicationSettings()
+            {
+                PhysicalDirectory = Directory.GetCurrentDirectory(),
+                ApplicationPath = "/Blog",
+                SiteName = GetWebsiteSettings().Name,
+                Authentication = new AuthenticationSettings() { EnableWindowsAuthentication = true },
+               
+            };
+        }
 
-            manager.Delete(parentWebSite, name);
+        public static void CreateApplication(ApplicationSettings getAppSettings)
+        {
+            var manager = CreateWebsiteManager();
+            manager.AddApplication(getAppSettings);
         }
     }
 }

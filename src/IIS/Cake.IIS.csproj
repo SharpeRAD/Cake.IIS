@@ -49,13 +49,10 @@
   <ItemGroup>
     <Compile Include="Aliases\FtpsiteAliases.cs" />
     <Compile Include="Aliases\ApplicationPoolAliases.cs" />
-    <Compile Include="Aliases\VirtualApplicationAliases.cs" />
     <Compile Include="Aliases\WebFarmAliases.cs" />
     <Compile Include="Interfaces\IDirectorySettings.cs" />
     <Compile Include="Manager\Base\BaseManager.cs" />
-    <Compile Include="Manager\Types\ApplicationManager.cs" />
     <Compile Include="Manager\Types\ApplicationPoolManager.cs" />
-    <Compile Include="Manager\Types\VirtualApplicationSettings.cs" />
     <Compile Include="Manager\Types\WebFarmManager.cs" />
     <Compile Include="Settings\ApplicationSettings.cs" />
     <Compile Include="Settings\BindingSettings.cs" />
