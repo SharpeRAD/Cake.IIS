@@ -554,6 +554,7 @@ namespace Cake.IIS
                     if (settings.Overwrite)
                     {
                         _Log.Information("Application will be overwriten '{1}/{0}'", settings.ApplicationPath, settings.SiteName);
+                        app.VirtualDirectories.Clear();
                         newApp = false;
                     }
                     else throw new Exception("Application '" + settings.ApplicationPath + "' already exists.");
@@ -646,15 +647,6 @@ namespace Cake.IIS
                 throw new ArgumentException("Applicaiton path cannot be null!");
             }
 
-
-
-            //Get Pool
-            ApplicationPool appPool = _Server.ApplicationPools.SingleOrDefault(p => p.Name == settings.ApplicationPool);
-
-            if (appPool == null)
-            {
-                throw new Exception("Application Pool '" + settings.ApplicationPool + "' does not exist.");
-            }
 
 
 
