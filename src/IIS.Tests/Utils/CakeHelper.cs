@@ -5,6 +5,7 @@
     using System.Threading;
 
     using Cake.Core;
+    
     using Microsoft.Web.Administration;
 
     using NSubstitute;
@@ -65,9 +66,9 @@ namespace Cake.IIS.Tests.Utils
                 return manager;
             }
 
+        
 
-
-            //Settings
+        //Settings
             public static ApplicationPoolSettings GetAppPoolSettings()
             {
                 return new ApplicationPoolSettings
@@ -299,6 +300,35 @@ namespace Cake.IIS.Tests.Utils
                 }
             }
 
-        #endregion
+        #endregion      
+
+        public static Application GetVirtualApplication(string webSite, string appName)
+        {
+            if (!appName.StartsWith("/"))
+                appName = "/" + appName;
+            using (var server = new ServerManager())
+            {
+                var site = server.Sites.FirstOrDefault(x => x.Name == webSite);
+                return site?.Applications.FirstOrDefault(x => x.Path == appName);
+            }
+        }
+
+        public static ApplicationSettings GetAppSettings()
+        {
+            return new ApplicationSettings()
+            {
+                PhysicalDirectory = Directory.GetCurrentDirectory(),
+                ApplicationPath = "/Blog",
+                SiteName = GetWebsiteSettings().Name,
+                Authentication = new AuthenticationSettings() { EnableWindowsAuthentication = true },
+               
+            };
+        }
+
+        public static void CreateApplication(ApplicationSettings getAppSettings)
+        {
+            var manager = CreateWebsiteManager();
+            manager.AddApplication(getAppSettings);
+        }
     }
 }

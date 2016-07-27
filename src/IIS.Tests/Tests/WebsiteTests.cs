@@ -1,5 +1,8 @@
 ﻿#region Using Statements
-    using Cake.IIS.Tests.Utils;
+
+using System.IO;
+using Cake.Core.IO;
+using Cake.IIS.Tests.Utils;
     using Microsoft.Web.Administration;
     using Xunit;
 #endregion
@@ -10,6 +13,8 @@ namespace Cake.IIS.Tests
 {
     public class WebsiteTests
     {
+
+
         [Fact]
         public void Should_Create_Website()
         {
@@ -21,6 +26,21 @@ namespace Cake.IIS.Tests
             WebsiteManager manager = CakeHelper.CreateWebsiteManager();
             manager.Create(settings);
 
+            // Assert
+            Assert.NotNull(CakeHelper.GetWebsite(settings.Name));
+        }
+        [Fact]
+        public void Should_Create_App()
+        {
+            // Arrange
+            var settings = CakeHelper.GetWebsiteSettings();
+            CakeHelper.DeleteWebsite(settings.Name);
+            WebsiteManager manager = CakeHelper.CreateWebsiteManager();
+            manager.Create(settings);
+            Directory.CreateDirectory("Test");
+
+            // Act
+            CakeHelper.CreateApplication(CakeHelper.GetAppSettings());
             // Assert
             Assert.NotNull(CakeHelper.GetWebsite(settings.Name));
         }
