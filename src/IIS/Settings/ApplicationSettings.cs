@@ -16,7 +16,7 @@ namespace Cake.IIS
         public ApplicationSettings()
         {
             Authentication = new AuthenticationSettings();
-            EnabledProtocols = "http";
+            
         }
         #endregion
 
@@ -33,7 +33,6 @@ namespace Cake.IIS
 
         public string ApplicationPath { get; set; }
 
-        public string EnabledProtocols { get; set; }
 
         public string ApplicationPool { get; set; }
 
