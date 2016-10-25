@@ -1,3 +1,6 @@
+### New in 0.2.0 (Released 2016/10/24)
+* Check application exists
+
 ### New in 0.1.9 (Released 2016/10/23)
 * Configure enabled protocols
 * Virtual directory support
