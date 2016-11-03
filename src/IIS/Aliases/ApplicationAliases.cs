@@ -101,5 +101,33 @@ namespace Cake.IIS
                     .ApplicationExists(settings);
             }
         }
+
+        /// <summary>
+        /// Changes the physical path of an application in local IIS.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="settings">The site application settings.</param>
+        [CakeMethodAlias]
+        public static bool ChangeSiteApplicationPhysicalPath(this ICakeContext context, ApplicationSettings settings)
+        {
+            return context.ChangeSiteApplicationPhysicalPath("", settings);
+        }
+
+        /// <summary>
+        /// Changes the physical path of an application in remote IIS.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="server">The remote server name.</param>
+        /// <param name="settings">The site application settings.</param>
+        [CakeMethodAlias]
+        public static bool ChangeSiteApplicationPhysicalPath(this ICakeContext context, string server, ApplicationSettings settings)
+        {
+            using (ServerManager manager = BaseManager.Connect(server))
+            {
+                return WebsiteManager
+                    .Using(context.Environment, context.Log, manager)
+                    .ApplicationChangePhysicalDirectory(settings);
+            }
+        }
     }
 }
