@@ -1,3 +1,6 @@
+### New in 0.2.1 (Released 2016/10/26)
+* Fixed the SiteApplicationExists return value for local IIS.
+
 ### New in 0.2.0 (Released 2016/10/24)
 * Check application exists
 
