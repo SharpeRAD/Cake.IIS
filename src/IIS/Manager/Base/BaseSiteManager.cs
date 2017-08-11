@@ -805,6 +805,57 @@ namespace Cake.IIS
                 }
             }
 
+            /// <summary>
+            /// Changes the physical path of an application in a IIS site
+            /// </summary>
+            /// <param name="settings">The settings of the application to change</param>
+            /// <returns>If the application physical path was changed.</returns>
+            public bool ApplicationChangePhysicalDirectory(ApplicationSettings settings)
+            {
+                if (settings == null)
+                {
+                    throw new ArgumentNullException("settings");
+                }
+
+                if (string.IsNullOrWhiteSpace(settings.SiteName))
+                {
+                    throw new ArgumentException("Site name cannot be null!");
+                }
+
+                if (string.IsNullOrWhiteSpace(settings.ApplicationPath))
+                {
+                    throw new ArgumentException("Applicaiton path cannot be null!");
+                }
+
+
+
+                //Get Site
+                Site site = _Server.Sites.SingleOrDefault(p => p.Name == settings.SiteName);
+                
+                if(site == null)
+                {
+                    throw new Exception("Site '" + settings.SiteName + "' does not exist.");
+                }
+
+                var application = site.Applications.FirstOrDefault(p => p.Path == settings.ApplicationPath);
+                if(application == null)
+                {
+                    throw new Exception("Application '" + settings.ApplicationPath + "' does not exist.");
+                }
+
+                var virtualDirectory = application.VirtualDirectories.FirstOrDefault(v => v.Path == settings.VirtualDirectory);
+
+                if(virtualDirectory == null)
+                {
+                    throw new Exception("Virtual Directory '" + settings.VirtualDirectory + "' does not exist.");
+                }
+
+                virtualDirectory.PhysicalPath = settings.PhysicalDirectory.FullPath;
+
+                _Server.CommitChanges();
+                return true;
+            }
+
         #endregion
     }
 }
