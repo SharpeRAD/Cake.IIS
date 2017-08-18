@@ -1,11 +1,6 @@
-﻿#region Using Statements
-    using System;
-    using Cake.Core;
-    using Cake.Core.Annotations;
-    using Microsoft.Web.Administration;
-#endregion
-
-
+﻿using Cake.Core;
+using Cake.Core.Annotations;
+using Microsoft.Web.Administration;
 
 namespace Cake.IIS
 {

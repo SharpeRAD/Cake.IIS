@@ -10,10 +10,6 @@ var configuration = Argument("configuration", "Release");
 
 var appName = "Cake.IIS";
 
-
-
-
-
 //////////////////////////////////////////////////////////////////////
 // VARIABLES
 //////////////////////////////////////////////////////////////////////
@@ -46,10 +42,6 @@ var solutions = GetFiles("./src/*.sln");
 // Package
 var zipPackage = buildResultDir + "/Cake-IIS-v" + semVersion + ".zip";
 
-
-
-
-
 ///////////////////////////////////////////////////////////////////////////////
 // SETUP / TEARDOWN
 ///////////////////////////////////////////////////////////////////////////////
@@ -66,10 +58,6 @@ Teardown(() =>
     // Executed AFTER the last task.
     Information("Finished building version {0} of {1}.", semVersion, appName);
 });
-
-
-
-
 
 ///////////////////////////////////////////////////////////////////////////////
 // PREPARE
@@ -100,10 +88,6 @@ Task("Restore-Nuget-Packages")
         NuGetRestore(solution);
     }
 });
-
-
-
-
 
 ///////////////////////////////////////////////////////////////////////////////
 // BUILD
@@ -153,10 +137,6 @@ Task("Run-Unit-Tests")
     });
 });
 
-
-
-
-
 ///////////////////////////////////////////////////////////////////////////////
 // PACKAGE
 ///////////////////////////////////////////////////////////////////////////////
@@ -174,8 +154,6 @@ Task("Copy-Files")
 
     CopyFiles(new FilePath[] { "LICENSE", "README.md", "ReleaseNotes.md" }, binDir);
 
-
-
     // Test
     CreateDirectory("./test/tools/Addins/Cake.IIS/lib/net45/");
 
@@ -189,8 +167,6 @@ Task("Zip-Files")
 {
     Zip(binDir, zipPackage);
 });
-
-
 
 Task("Create-NuGet-Packages")
     .IsDependentOn("Zip-Files")
@@ -221,8 +197,6 @@ Task("Publish-Nuget")
         throw new InvalidOperationException("Could not resolve Nuget API key.");
     }
 
-
-
     // Push the package.
     var package = nugetRoot + "/Cake.IIS." + version + ".nupkg";
 
@@ -232,10 +206,6 @@ Task("Publish-Nuget")
         Source = "https://www.nuget.org/api/v2/package"
     });
 });
-
-
-
-
 
 ///////////////////////////////////////////////////////////////////////////////
 // APPVEYOR
@@ -256,10 +226,6 @@ Task("Upload-AppVeyor-Artifacts")
     AppVeyor.UploadArtifact(zipPackage);
 });
 
-
-
-
-
 ///////////////////////////////////////////////////////////////////////////////
 // MESSAGE
 ///////////////////////////////////////////////////////////////////////////////
@@ -271,12 +237,10 @@ Task("Slack")
     // Resolve the API key.
     var token = EnvironmentVariable("SLACK_TOKEN");
 
-    if(string.IsNullOrEmpty(token))
+    if (string.IsNullOrEmpty(token))
     {
         throw new InvalidOperationException("Could not resolve Slack token.");
     }
-
-
 
     // Post Message
     var text = "Published " + appName + " v" + version;
@@ -285,19 +249,15 @@ Task("Slack")
 
     if (result.Ok)
     {
-        //Posted
+        // Posted
         Information("Message was succcessfully sent to Slack.");
     }
     else
     {
-        //Error
+        // Error
         Error("Failed to send message to Slack: {0}", result.Error);
     }
 });
-
-
-
-
 
 //////////////////////////////////////////////////////////////////////
 // TASK TARGETS
@@ -316,14 +276,8 @@ Task("AppVeyor")
     .IsDependentOn("Upload-AppVeyor-Artifacts")
     .IsDependentOn("Slack");
 
-
-
 Task("Default")
     .IsDependentOn("Package");
-
-
-
-
 
 ///////////////////////////////////////////////////////////////////////////////
 // EXECUTION

@@ -1,90 +1,66 @@
-#region Using Statements
-    using System;
-    using Cake.Core.IO;
-#endregion
-
-
+using System;
+using Cake.Core.IO;
 
 namespace Cake.IIS
 {
     public class ApplicationSettings : IDirectorySettings
     {
-        #region Constructor (1)
-            public ApplicationSettings()
+        public ApplicationSettings()
+        {
+        }
+
+        public string ComputerName { get; set; }
+
+        public string SiteName { get; set; }
+
+        public string ApplicationPath { get; set; }
+
+        public string ApplicationPool { get; set; }
+
+        public string VirtualDirectory { get; set; }
+
+        public DirectoryPath WorkingDirectory { get; set; }
+
+        public DirectoryPath PhysicalDirectory { get; set; }
+
+        public AuthenticationSettings Authentication { get; set; }
+
+        public AuthorizationSettings Authorization { get; set; }
+
+        public string AlternateEnabledProtocols { get; set; }
+
+        [Obsolete("Use Authentication.UserName")]
+        public string UserName
+        {
+            get
             {
-
+                return Authentication.Username;
             }
-        #endregion
-
-
-
-
-
-        #region Properties (9)
-            public string ComputerName { get; set; }
-
-
-
-            public string SiteName { get; set; }
-
-            public string ApplicationPath { get; set; }
-        
-
-
-            public string ApplicationPool { get; set; }
-                
-
-
-            public string VirtualDirectory { get; set; }
-
-            public DirectoryPath WorkingDirectory { get; set; }
-
-            public DirectoryPath PhysicalDirectory { get; set; }
-          
-
-
-            public AuthenticationSettings Authentication { get; set; }
-
-            public AuthorizationSettings Authorization { get; set; }
-
-            public string AlternateEnabledProtocols { get; set; }
-
-
-            [Obsolete("Use Authentication.UserName")]
-            public string UserName
+            set
             {
-                get
+                if (Authentication == null)
                 {
-                    return this.Authentication.Username;
+                    Authentication = new AuthenticationSettings();
                 }
-                set
-                {
-                    if (this.Authentication == null)
-                    {
-                        this.Authentication = new AuthenticationSettings();
-                    }
-
-                    this.Authentication.Username = value;
-                }
+                Authentication.Username = value;
             }
+        }
 
-            [Obsolete("Use Authentication.Password")]
-            public string Password
+        [Obsolete("Use Authentication.Password")]
+        public string Password
+        {
+            get
             {
-                get
-                {
-                    return this.Authentication.Password;
-                }
-                set
-                {
-                    if (this.Authentication == null)
-                    {
-                        this.Authentication = new AuthenticationSettings();
-                    }
-
-                    this.Authentication.Password = value;
-                }
+                return Authentication.Password;
             }
-        #endregion
+            set
+            {
+                if (Authentication == null)
+                {
+                    Authentication = new AuthenticationSettings();
+                }
+                Authentication.Password = value;
+            }
+        }
     }
 }

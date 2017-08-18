@@ -1,11 +1,6 @@
 ﻿using Cake.Core;
 using Cake.Core.Annotations;
 using Microsoft.Web.Administration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cake.IIS
 {

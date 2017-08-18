@@ -1,6 +1,5 @@
 ﻿using Cake.IIS.Bindings;
 
-
 namespace Cake.IIS
 {
     /// <summary>
@@ -11,106 +10,62 @@ namespace Cake.IIS
         /// <summary>
         /// Creates http binding (port: 80)
         /// </summary>
-        public static BindingSettings Http
+        public static BindingSettings Http => new BindingSettings(BindingProtocol.Http)
         {
-            get
-            {
-                return new BindingSettings(BindingProtocol.Http)
-                {
-                    HostName = "*",
-                    IpAddress = "*",
-                    Port = 80
-                };
-            }
-        }
+            HostName = "*",
+            IpAddress = "*",
+            Port = 80
+        };
 
         /// <summary>
         /// Creates https binding (port: 443)
         /// </summary>
-        public static BindingSettings Https
+        public static BindingSettings Https => new BindingSettings(BindingProtocol.Https)
         {
-            get
-            {
-                return new BindingSettings(BindingProtocol.Https)
-                {
-                    HostName = "*",
-                    IpAddress = "*",
-                    Port = 443
-                };
-            }
-        }
-
-
+            HostName = "*",
+            IpAddress = "*",
+            Port = 443
+        };
 
         /// <summary>
         /// Creates ftp binding (port: 21)
         /// </summary>
-        public static BindingSettings Ftp
+        public static BindingSettings Ftp => new PortBindingSettings(BindingProtocol.Ftp)
         {
-            get
-            {
-                return new PortBindingSettings(BindingProtocol.Ftp)
-                {
-                    Port = 21
-                };
-            }
-        }
+            Port = 21
+        };
 
         /// <summary>
         /// Creates net.tcp binding (port: 808)
         /// </summary>
-        public static BindingSettings NetTcp
+        public static BindingSettings NetTcp => new PortBindingSettings(BindingProtocol.NetTcp)
         {
-            get
-            {
-                return new PortBindingSettings(BindingProtocol.NetTcp)
-                {
-                    Port = 808,
-                    HostName = "*"
-                };
-            }
-        }
+            Port = 808,
+            HostName = "*"
+        };
 
         /// <summary>
         /// Creates net.pipe binding
         /// </summary>
-        public static BindingSettings NetPipe
+        public static BindingSettings NetPipe => new HostBindingSettings(BindingProtocol.NetPipe)
         {
-            get
-            {
-                return new HostBindingSettings(BindingProtocol.NetPipe)
-                {
-                    HostName = "*"
-                };
-            }
-        }
+            HostName = "*"
+        };
 
         /// <summary>
         /// Creates net.msmq binding.
         /// </summary>
-        public static BindingSettings NetMsmq
+        public static BindingSettings NetMsmq => new HostBindingSettings(BindingProtocol.NetMsmq)
         {
-            get
-            {
-                return new HostBindingSettings(BindingProtocol.NetMsmq)
-                {
-                    HostName = "localhost"
-                };
-            }
-        }
+            HostName = "localhost"
+        };
 
         /// <summary>
         /// Creates msmq.formatname binding
         /// </summary>
-        public static BindingSettings MsmqFormatName
+        public static BindingSettings MsmqFormatName => new BindingSettings(BindingProtocol.MsmqFormatName)
         {
-            get
-            {
-                return new BindingSettings(BindingProtocol.MsmqFormatName)
-                {
-                    HostName = "localhost"
-                };
-            }
-        }
+            HostName = "localhost"
+        };
     }
 }

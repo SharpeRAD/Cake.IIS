@@ -1,9 +1,4 @@
-﻿#region Using Statements
-    using Microsoft.Web.Administration;
-    using Xunit;
-#endregion
-
-
+﻿using Xunit;
 
 namespace Cake.IIS.Tests
 {
@@ -37,8 +32,6 @@ namespace Cake.IIS.Tests
             // Assert
             Assert.Null(CakeHelper.GetWebFarm(settings.Name));
         }
-
-
 
         [Fact(Skip = "Skip on AppVeyor")]
         public void Should_Set_Server_Available()

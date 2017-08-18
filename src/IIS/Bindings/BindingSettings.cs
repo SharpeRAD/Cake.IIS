@@ -1,19 +1,15 @@
-﻿using System;
-
-namespace Cake.IIS
+﻿namespace Cake.IIS
 {
     /// <summary>
     /// Class to configure any type of IIS binding (secure or not).
     /// </summary>
     public class BindingSettings
     {
-        #region Constructor (2)
         /// <summary>
         /// Creates new instance of <see cref="BindingSettings"/>.
         /// </summary>
         public BindingSettings()
         {
-
         }
 
         /// <summary>
@@ -22,15 +18,9 @@ namespace Cake.IIS
         /// <param name="bindingProtocol">Binding type.</param>
         public BindingSettings(BindingProtocol bindingProtocol)
         {
-            this.BindingProtocol = bindingProtocol;
+            BindingProtocol = bindingProtocol;
         }
-        #endregion
 
-
-
-
-
-        #region Properties (7)
         /// <summary>
         /// Gets or sets IP Address
         /// </summary>
@@ -41,14 +31,10 @@ namespace Cake.IIS
         /// </summary>
         public int Port { get; set; }
 
-
-
         /// <summary>
         /// Gets or sets Host Name for binding
         /// </summary>
         public string HostName { get; set; }
-
-
 
         /// <summary>
         /// Gets or sets hash for specific certificate.
@@ -60,8 +46,6 @@ namespace Cake.IIS
         /// </summary>
         public string CertificateStoreName { get; set; }
 
-
-
         /// <summary>
         /// Gets IIS binding type.
         /// </summary>>
@@ -69,8 +53,6 @@ namespace Cake.IIS
         /// Returns <see cref="BindingProtocol"/> which will be used to determine IIS binding type.
         /// </returns>
         public BindingProtocol BindingProtocol { get; set; }
-        
-
 
         /// <summary>
         /// Gets IIS binding information
@@ -78,13 +60,6 @@ namespace Cake.IIS
         /// <returns>
         /// Returns details of binding properties required to set up specific binding type.
         /// </returns>
-        public virtual string BindingInformation
-        {
-            get
-            {
-                return string.Format(@"{0}:{1}:{2}", IpAddress, Port, HostName);
-            }
-        }
-        #endregion
+        public virtual string BindingInformation => $@"{IpAddress}:{Port}:{HostName}";
     }
 }
