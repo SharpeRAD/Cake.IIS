@@ -1,12 +1,7 @@
-﻿#region Using Statements
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-
 using Cake.Core.Diagnostics;
-#endregion
-
-
 
 namespace Cake.IIS.Tests
 {
@@ -30,8 +25,6 @@ namespace Cake.IIS.Tests
             get { return Verbosity.Diagnostic; }
             set { }
         }
-
-
 
         /// <summary>
         /// Writes the text representation of the specified array of objects to the 

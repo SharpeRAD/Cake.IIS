@@ -1,10 +1,6 @@
-﻿#region Using Statements
-    using System;
-    using Microsoft.Web.Administration;
-    using Xunit;
-#endregion
-
-
+﻿using System;
+using Microsoft.Web.Administration;
+using Xunit;
 
 namespace Cake.IIS.Tests
 {
@@ -106,14 +102,14 @@ namespace Cake.IIS.Tests
             // Assert
             var website = CakeHelper.GetWebsite(settings.Name);
             Assert.NotNull(website);
-            Assert.Contains(BindingProtocol.Http.ToString(), 
-                website.ApplicationDefaults.EnabledProtocols, 
+            Assert.Contains(BindingProtocol.Http.ToString(),
+                website.ApplicationDefaults.EnabledProtocols,
                 StringComparison.OrdinalIgnoreCase);
-            Assert.Contains(BindingProtocol.NetMsmq.ToString(), 
-                website.ApplicationDefaults.EnabledProtocols, 
+            Assert.Contains(BindingProtocol.NetMsmq.ToString(),
+                website.ApplicationDefaults.EnabledProtocols,
                 StringComparison.OrdinalIgnoreCase);
-            Assert.Contains(BindingProtocol.NetTcp.ToString(), 
-                website.ApplicationDefaults.EnabledProtocols, 
+            Assert.Contains(BindingProtocol.NetTcp.ToString(),
+                website.ApplicationDefaults.EnabledProtocols,
                 StringComparison.OrdinalIgnoreCase);
         }
 

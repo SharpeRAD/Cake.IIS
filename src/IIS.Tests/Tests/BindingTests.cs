@@ -1,9 +1,4 @@
-﻿#region Using Statements
-    using Microsoft.Web.Administration;
-    using Xunit;
-#endregion
-
-
+﻿using Xunit;
 
 namespace Cake.IIS.Tests
 {
@@ -98,8 +93,6 @@ namespace Cake.IIS.Tests
             Assert.Contains(website.Bindings, b => b.Protocol == BindingProtocol.MsmqFormatName.ToString() &&
                                                    b.BindingInformation == bindingSettings.BindingInformation);
         }
-
-
 
         private WebsiteSettings CreateWebSite()
         {

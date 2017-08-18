@@ -1,8 +1,4 @@
-﻿#region Using Statements
-    using Cake.Core.IO;
-#endregion
-
-
+﻿using Cake.Core.IO;
 
 namespace Cake.IIS
 {
@@ -16,13 +12,11 @@ namespace Cake.IIS
         /// </summary>
         string ComputerName { get; set; }
 
-
-
         /// <summary>
         /// Gets or sets the cake working directory
         /// </summary>
         DirectoryPath WorkingDirectory { get; set; }
-        
+
         /// <summary>
         /// Gets or sets the physical IIS directory
         /// </summary>

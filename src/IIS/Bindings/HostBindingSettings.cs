@@ -1,7 +1,4 @@
-﻿
-
-
-namespace Cake.IIS.Bindings
+﻿namespace Cake.IIS.Bindings
 {
     /// <summary>
     /// Class to configure net.pipe binding.
@@ -18,9 +15,6 @@ namespace Cake.IIS.Bindings
         }
 
         /// <inheritdoc cref="BindingSettings.BindingInformation"/>
-        public override string BindingInformation
-        {
-            get { return string.Format("{0}", HostName); }
-        }
+        public override string BindingInformation => $"{HostName}";
     }
 }
