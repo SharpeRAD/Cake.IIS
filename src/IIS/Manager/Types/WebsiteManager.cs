@@ -58,12 +58,23 @@ namespace Cake.IIS
         {
             bool exists;
             Site site = base.CreateSite(settings, out exists);
-                
+
             if (!exists)
             {
-                _Server.CommitChanges();
+                // Commit the changes
+                ServerManager.CommitChanges();
                 _Log.Information("Web Site '{0}' created.", settings.Name);
+
+                // Set directory browsing
+                if (settings.EnableDirectoryBrowsing)
+                {
+                    var config = ServerManager.GetWebConfiguration(settings.Name);
+                    var directoryBrowseSection = config.GetSection("system.webServer/directoryBrowse");
+                    directoryBrowseSection["enabled"] = true;
+                    directoryBrowseSection["showFlags"] = @"Date, Time, Size, Extension";
+                    ServerManager.CommitChanges();
             }
+        }
         }
         #endregion
     }

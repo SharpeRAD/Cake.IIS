@@ -9,5 +9,14 @@
             Binding = IISBindings.Http;
         }
         #endregion
+
+        /// <summary>
+        /// Flag to get or set of directory browsing should be enabled
+        /// </summary>
+        public bool EnableDirectoryBrowsing
+        {
+            get;
+            set;
+        }
     }
 }

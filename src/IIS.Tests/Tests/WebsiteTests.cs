@@ -24,6 +24,57 @@ namespace Cake.IIS.Tests
 
             // Assert
             Assert.NotNull(CakeHelper.GetWebsite(settings.Name));
+
+            // Cleanup
+            CakeHelper.DeleteWebsite(settings.Name);
+        }
+
+        [Fact]
+        public void Should_Create_Website_With_DirectoryBrowsing()
+        {
+            // Arrange
+            var settings = CakeHelper.GetWebsiteSettings("Tony");
+            settings.EnableDirectoryBrowsing = true;
+            CakeHelper.DeleteWebsite(settings.Name);
+            // Make sure the web.config exists
+            CakeHelper.CreateWebConfig(settings);
+
+            // Act
+            WebsiteManager manager = CakeHelper.CreateWebsiteManager();
+            manager.Create(settings);
+
+            // Assert
+            Assert.NotNull(CakeHelper.GetWebsite(settings.Name));
+            var config = manager.ServerManager.GetWebConfiguration(settings.Name);
+            var directoryBrowseSection = config.GetSection("system.webServer/directoryBrowse");
+            Assert.True((bool)directoryBrowseSection["enabled"]);
+
+            // Cleanup
+            CakeHelper.DeleteWebsite(settings.Name);
+        }
+
+        [Fact]
+        public void Should_Create_Website_Without_DirectoryBrowsing()
+        {
+            // Arrange
+            var settings = CakeHelper.GetWebsiteSettings("Stark");
+            settings.EnableDirectoryBrowsing = false;
+            CakeHelper.DeleteWebsite(settings.Name);
+            // Make sure the web.config exists
+            CakeHelper.CreateWebConfig(settings);
+
+            // Act
+            WebsiteManager manager = CakeHelper.CreateWebsiteManager();
+            manager.Create(settings);
+
+            // Assert
+            Assert.NotNull(CakeHelper.GetWebsite(settings.Name));
+            var config = manager.ServerManager.GetWebConfiguration(settings.Name);
+            var directoryBrowseSection = config.GetSection("system.webServer/directoryBrowse");
+            Assert.False((bool)directoryBrowseSection["enabled"]);
+
+            // Cleanup
+            CakeHelper.DeleteWebsite(settings.Name);
         }
 
         [Fact]
@@ -56,6 +107,9 @@ namespace Cake.IIS.Tests
                                                    b.BindingInformation.Contains(expectedPort.ToString()) &&
                                                    b.BindingInformation.Contains(expectedHostName) &&
                                                    b.BindingInformation.Contains(expectedIpAddress));
+
+            // Cleanup
+            CakeHelper.DeleteWebsite(settings.Name);
         }
 
         [Fact]
@@ -90,6 +144,9 @@ namespace Cake.IIS.Tests
                                                    b.BindingInformation.Contains(expectedPort.ToString()) &&
                                                    b.BindingInformation.Contains(expectedHostName) &&
                                                    b.BindingInformation.Contains(expectedIpAddress));
+
+            // Cleanup
+            CakeHelper.DeleteWebsite(settings.Name);
         }
 
         [Fact]
@@ -107,15 +164,18 @@ namespace Cake.IIS.Tests
             // Assert
             var website = CakeHelper.GetWebsite(settings.Name);
             Assert.NotNull(website);
-            Assert.Contains(BindingProtocol.Http.ToString(), 
-                website.ApplicationDefaults.EnabledProtocols, 
+            Assert.Contains(BindingProtocol.Http.ToString(),
+                website.ApplicationDefaults.EnabledProtocols,
                 StringComparison.OrdinalIgnoreCase);
-            Assert.Contains(BindingProtocol.NetMsmq.ToString(), 
-                website.ApplicationDefaults.EnabledProtocols, 
+            Assert.Contains(BindingProtocol.NetMsmq.ToString(),
+                website.ApplicationDefaults.EnabledProtocols,
                 StringComparison.OrdinalIgnoreCase);
-            Assert.Contains(BindingProtocol.NetTcp.ToString(), 
-                website.ApplicationDefaults.EnabledProtocols, 
+            Assert.Contains(BindingProtocol.NetTcp.ToString(),
+                website.ApplicationDefaults.EnabledProtocols,
                 StringComparison.OrdinalIgnoreCase);
+
+            // Cleanup
+            CakeHelper.DeleteWebsite(settings.Name);
         }
 
         [Fact]
@@ -130,6 +190,9 @@ namespace Cake.IIS.Tests
 
             // Assert
             Assert.Null(CakeHelper.GetWebsite(settings.Name));
+
+            // Cleanup
+            CakeHelper.DeleteWebsite(settings.Name);
         }
 
         [Fact]
@@ -149,6 +212,9 @@ namespace Cake.IIS.Tests
 
             Assert.NotNull(site);
             Assert.True(site.State == ObjectState.Started);
+
+            // Cleanup
+            CakeHelper.DeleteWebsite(settings.Name);
         }
 
         [Fact]
@@ -168,6 +234,9 @@ namespace Cake.IIS.Tests
 
             Assert.NotNull(site);
             Assert.True(site.State == ObjectState.Stopped);
+
+            // Cleanup
+            CakeHelper.DeleteWebsite(settings.Name);
         }
     }
 }

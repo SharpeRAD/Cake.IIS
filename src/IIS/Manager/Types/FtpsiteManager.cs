@@ -77,14 +77,14 @@ namespace Cake.IIS
 
 
                 // Host name support
-                var hostNameSupport = _Server
+                    var hostNameSupport = ServerManager
                     .GetApplicationHostConfiguration()
                     .GetSection("system.ftpServer/serverRuntime")
                     .GetChildElement("hostNameSupport");
 
                 hostNameSupport.SetAttributeValue("useDomainNameAsHostName", true);
 
-                _Server.CommitChanges();
+                    ServerManager.CommitChanges();
 
                 _Log.Information("Ftp Site '{0}' created.", settings.Name);
             }
