@@ -114,7 +114,7 @@ namespace Cake.IIS
             }
 
             farms.Add(farm);
-            _Server.CommitChanges();
+                ServerManager.CommitChanges();
 
             _Log.Information("WebFarm created.");
         }
@@ -132,7 +132,7 @@ namespace Cake.IIS
             if (farm != null)
             {
                 farms.Remove(farm);
-                _Server.CommitChanges();
+                    ServerManager.CommitChanges();
 
                 _Log.Information("WebFarm deleted.");
                 return true;
@@ -189,7 +189,7 @@ namespace Cake.IIS
                     serverElement["address"] = server;
 
                     servers.Add(serverElement);
-                    _Server.CommitChanges();
+                        ServerManager.CommitChanges();
 
                     _Log.Information("Adding server '{0}'.", address);
                     return true;
@@ -222,7 +222,7 @@ namespace Cake.IIS
                 if (server != null)
                 {
                     servers.Remove(server);
-                    _Server.CommitChanges();
+                        ServerManager.CommitChanges();
 
                     _Log.Information("Removed server '{0}'.", address);
                     return true;
@@ -408,7 +408,7 @@ namespace Cake.IIS
         //Helpers
         private ConfigurationElementCollection GetFarms()
         {
-            Configuration config = _Server.GetApplicationHostConfiguration();
+                Configuration config = ServerManager.GetApplicationHostConfiguration();
             ConfigurationSection section = config.GetSection("webFarms");
 
             return section.GetCollection();

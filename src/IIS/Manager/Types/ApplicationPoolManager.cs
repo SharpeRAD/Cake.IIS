@@ -93,7 +93,7 @@ namespace Cake.IIS
 
 
             //Get Pool
-            var pool = _Server.ApplicationPools.FirstOrDefault(p => p.Name == settings.Name);
+                var pool = ServerManager.ApplicationPools.FirstOrDefault(p => p.Name == settings.Name);
 
             if(pool != null)
             {
@@ -110,7 +110,7 @@ namespace Cake.IIS
 
 
             //Add Pool
-            pool = _Server.ApplicationPools.Add(settings.Name);
+                pool = ServerManager.ApplicationPools.Add(settings.Name);
 
             pool.AutoStart             = settings.Autostart;
 
@@ -179,7 +179,7 @@ namespace Cake.IIS
 
 
 
-            _Server.CommitChanges();
+                ServerManager.CommitChanges();
 
             _Log.Information("Application pool created.");
         }
@@ -193,7 +193,7 @@ namespace Cake.IIS
         {
             if (!this.IsSystemDefault(name))
             {
-                var pool = _Server.ApplicationPools.FirstOrDefault(p => p.Name == name);
+                    var pool = ServerManager.ApplicationPools.FirstOrDefault(p => p.Name == name);
 
                 if (pool == null)
                 {
@@ -202,8 +202,8 @@ namespace Cake.IIS
                 }
                 else
                 {
-                    _Server.ApplicationPools.Remove(pool);
-                    _Server.CommitChanges();
+                        ServerManager.ApplicationPools.Remove(pool);
+                        ServerManager.CommitChanges();
 
                     _Log.Information("Application pool '{0}' deleted.", pool.Name);
                     return true;
@@ -222,7 +222,7 @@ namespace Cake.IIS
         /// <returns>If the application pool was recycled.</returns>
         public bool Recycle(string name)
         {
-            var pool = _Server.ApplicationPools.FirstOrDefault(p => p.Name == name);
+                var pool = ServerManager.ApplicationPools.FirstOrDefault(p => p.Name == name);
 
             if (pool == null)
             {
@@ -253,7 +253,7 @@ namespace Cake.IIS
         /// <returns>If the application pool was started.</returns>
         public bool Start(string name)
         {
-            var pool = _Server.ApplicationPools.FirstOrDefault(p => p.Name == name);
+                var pool = ServerManager.ApplicationPools.FirstOrDefault(p => p.Name == name);
 
             if (pool == null)
             {
@@ -284,7 +284,7 @@ namespace Cake.IIS
         /// <returns>If the application pool was stopped.</returns>
         public bool Stop(string name)
         {
-            var pool = _Server.ApplicationPools.FirstOrDefault(p => p.Name == name);
+                var pool = ServerManager.ApplicationPools.FirstOrDefault(p => p.Name == name);
 
             if (pool == null)
             {
@@ -315,7 +315,7 @@ namespace Cake.IIS
         /// <returns>If the application pool exists.</returns>
         public bool Exists(string name)
         {
-            if (_Server.ApplicationPools.SingleOrDefault(p => p.Name == name) != null)
+                if (ServerManager.ApplicationPools.SingleOrDefault(p => p.Name == name) != null)
             {
                 _Log.Information("The ApplicationPool '{0}' exists.", name);
                 return true;

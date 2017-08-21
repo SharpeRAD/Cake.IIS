@@ -27,11 +27,6 @@ namespace Cake.IIS
         /// Cake log
         /// </summary>
         protected readonly ICakeLog _Log;
-
-        /// <summary>
-        /// IIS server manager
-        /// </summary>
-        protected ServerManager _Server;
         #endregion
 
 
@@ -60,8 +55,12 @@ namespace Cake.IIS
         }
         #endregion
 
-
-
+        #region Properties
+        /// <summary>
+        /// IIS server manager
+        /// </summary>
+        public ServerManager ServerManager { get; private set; }
+        #endregion
 
 
         #region Methods (5)
@@ -112,7 +111,7 @@ namespace Cake.IIS
                 throw new ArgumentNullException(nameof(manager));
             }
 
-            _Server = manager;
+            ServerManager = manager;
         }
 
 

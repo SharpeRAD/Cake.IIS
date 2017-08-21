@@ -58,7 +58,7 @@ namespace Cake.IIS
 
 
             //Get Site
-            Site site = _Server.Sites.FirstOrDefault(p => p.Name == settings.Name);
+                Site site = ServerManager.Sites.FirstOrDefault(p => p.Name == settings.Name);
 
             if (site != null)
             {
@@ -71,7 +71,7 @@ namespace Cake.IIS
                     this.Delete(settings.Name);
 
                     ApplicationPoolManager
-                        .Using(_Environment, _Log, _Server)
+                            .Using(_Environment, _Log, ServerManager)
                         .Delete(site.ApplicationDefaults.ApplicationPoolName);
 
                     exists = false;
@@ -91,13 +91,13 @@ namespace Cake.IIS
 
             //Create Pool
             ApplicationPoolManager
-                .Using(_Environment, _Log, _Server)
+                    .Using(_Environment, _Log, ServerManager)
                 .Create(settings.ApplicationPool);
 
 
 
             //Site Settings
-            site = _Server.Sites.Add(
+                site = ServerManager.Sites.Add(
                 settings.Name,
                 settings.Binding.BindingProtocol.ToString().ToLower(),
                 settings.Binding.BindingInformation,
@@ -154,7 +154,7 @@ namespace Cake.IIS
             if (settings != null)
             {
                 //Authentication
-                var config = _Server.GetApplicationHostConfiguration();
+                    var config = ServerManager.GetApplicationHostConfiguration();
 
                 var locationPath = site + appPath;
                 var authentication = config.GetSection("system." + server + "/security/authorization", locationPath);
@@ -202,7 +202,7 @@ namespace Cake.IIS
             if (settings != null)
             {
                 //Authorization
-                var config = _Server.GetApplicationHostConfiguration();
+                    var config = ServerManager.GetApplicationHostConfiguration();
 
                 var locationPath = site + appPath;
                 var authorization = config.GetSection("system." + server + "/security/authorization", locationPath);
@@ -259,7 +259,7 @@ namespace Cake.IIS
         /// <returns>If the site was deleted.</returns>
         public bool Delete(string name)
         {
-            var site = _Server.Sites.FirstOrDefault(p => p.Name == name);
+                var site = ServerManager.Sites.FirstOrDefault(p => p.Name == name);
 
             if (site == null)
             {
@@ -268,8 +268,8 @@ namespace Cake.IIS
             }
             else
             {
-                _Server.Sites.Remove(site);
-                _Server.CommitChanges();
+                    ServerManager.Sites.Remove(site);
+                    ServerManager.CommitChanges();
 
                 _Log.Information("Site '{0}' deleted.", site.Name);
                 return false;
@@ -283,7 +283,7 @@ namespace Cake.IIS
         /// <returns>If the site exists.</returns>
         public bool Exists(string name)
         {
-            if (_Server.Sites.SingleOrDefault(p => p.Name == name) != null)
+                if (ServerManager.Sites.SingleOrDefault(p => p.Name == name) != null)
             {
                 _Log.Information("The site '{0}' exists.", name);
                 return true;
@@ -304,7 +304,7 @@ namespace Cake.IIS
         /// <returns>If the site was started.</returns>
         public bool Start(string name)
         {
-            var site = _Server.Sites.FirstOrDefault(p => p.Name == name);
+                var site = ServerManager.Sites.FirstOrDefault(p => p.Name == name);
 
             if (site == null)
             {
@@ -335,7 +335,7 @@ namespace Cake.IIS
         /// <returns>If the site was stopped.</returns>
         public bool Stop(string name)
         {
-            var site = _Server.Sites.FirstOrDefault(p => p.Name == name);
+                var site = ServerManager.Sites.FirstOrDefault(p => p.Name == name);
 
             if (site == null)
             {
@@ -382,7 +382,7 @@ namespace Cake.IIS
 
 
             //Get Site
-            Site site = _Server.Sites.SingleOrDefault(p => p.Name == siteName);
+                Site site = ServerManager.Sites.SingleOrDefault(p => p.Name == siteName);
 
             if (site != null)
             {
@@ -410,7 +410,7 @@ namespace Cake.IIS
                 }
 
                 site.Bindings.Add(newBinding);
-                _Server.CommitChanges();
+                    ServerManager.CommitChanges();
 
                 _Log.Information("Binding added.");
                 return true;
@@ -442,7 +442,7 @@ namespace Cake.IIS
 
 
             //Get Site
-            Site site = _Server.Sites.SingleOrDefault(p => p.Name == siteName);
+                Site site = ServerManager.Sites.SingleOrDefault(p => p.Name == siteName);
 
             if (site != null)
             {
@@ -452,7 +452,7 @@ namespace Cake.IIS
                 {
                     //Remove Binding
                     site.Bindings.Remove(binding);
-                    _Server.CommitChanges();
+                        ServerManager.CommitChanges();
 
                     _Log.Information("Binding removed.");
                     return true;
@@ -496,7 +496,7 @@ namespace Cake.IIS
 
 
             //Get Pool
-            ApplicationPool appPool = _Server.ApplicationPools.SingleOrDefault(p => p.Name == settings.ApplicationPool);
+                ApplicationPool appPool = ServerManager.ApplicationPools.SingleOrDefault(p => p.Name == settings.ApplicationPool);
 
             if (appPool == null)
             {
@@ -506,7 +506,7 @@ namespace Cake.IIS
 
 
             //Get Site
-            Site site = _Server.Sites.SingleOrDefault(p => p.Name == settings.SiteName);
+                Site site = ServerManager.Sites.SingleOrDefault(p => p.Name == settings.SiteName);
 
             if (site != null)
             {
@@ -541,7 +541,7 @@ namespace Cake.IIS
                 }
 
                 site.Applications.Add(app);
-                _Server.CommitChanges();
+                    ServerManager.CommitChanges();
 
                 return true;
             }
@@ -576,7 +576,7 @@ namespace Cake.IIS
 
 
             //Get Site
-            Site site = _Server.Sites.SingleOrDefault(p => p.Name == settings.SiteName);
+                Site site = ServerManager.Sites.SingleOrDefault(p => p.Name == settings.SiteName);
 
             if (site != null)
             {
@@ -590,7 +590,7 @@ namespace Cake.IIS
                 else
                 {
                     site.Applications.Remove(app);
-                    _Server.CommitChanges();
+                        ServerManager.CommitChanges();
 
                     return true;
                 }
@@ -628,7 +628,7 @@ namespace Cake.IIS
 
 
             //Get Site
-            Site site = _Server.Sites.SingleOrDefault(p => p.Name == settings.SiteName);
+                Site site = ServerManager.Sites.SingleOrDefault(p => p.Name == settings.SiteName);
 
             if (site == null)
             {
@@ -658,7 +658,7 @@ namespace Cake.IIS
             //this.SetAuthentication("webServer", settings.SiteName, settings.ApplicationPath, settings.Authentication);
             //this.SetAuthorization("webServer", settings.SiteName, settings.ApplicationPath, settings.Authorization);
                             
-            _Server.CommitChanges();
+                ServerManager.CommitChanges();
 
             return true;
         }
@@ -687,7 +687,7 @@ namespace Cake.IIS
 
 
             //Get Site
-            Site site = _Server.Sites.SingleOrDefault(p => p.Name == settings.SiteName);
+                Site site = ServerManager.Sites.SingleOrDefault(p => p.Name == settings.SiteName);
 
             if (site != null)
             {
@@ -710,7 +710,7 @@ namespace Cake.IIS
                     else
                     {
                         app.VirtualDirectories.Remove(vd);
-                        _Server.CommitChanges();
+                            ServerManager.CommitChanges();
 
                         return true;
                     }
@@ -747,7 +747,7 @@ namespace Cake.IIS
 
 
             //Get Site
-            Site site = _Server.Sites.SingleOrDefault(p => p.Name == settings.SiteName);
+                Site site = ServerManager.Sites.SingleOrDefault(p => p.Name == settings.SiteName);
 
             if (site != null)
             {
@@ -795,7 +795,7 @@ namespace Cake.IIS
 
 
             //Get Site
-            Site site = _Server.Sites.SingleOrDefault(p => p.Name == settings.SiteName);
+                Site site = ServerManager.Sites.SingleOrDefault(p => p.Name == settings.SiteName);
 
             if (site != null)
             {
