@@ -1,3 +1,7 @@
+### New in 0.3.0 (Released 2017/09/14)
+* [Support] Upgrade to Cake v0.22.0
+* [Support] Upgrade to .Net 4.6
+
 ### New in 0.2.4 (Released 2017/08/23)
 * [Feature] Added configuration aliases
 * [Feature] Added enable / disable directory browsing
