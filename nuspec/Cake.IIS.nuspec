@@ -22,9 +22,9 @@
    </metadata>
 
    <files>
-      <file src="Cake.IIS.dll" target="lib/net45" />
-      <file src="Cake.IIS.xml" target="lib/net45" />
-      <file src="Microsoft.Web.Administration.dll" target="lib/net45" />
+      <file src="Cake.IIS.dll" target="lib\net46" />
+      <file src="Cake.IIS.xml" target="lib\net46" />
+      <file src="Microsoft.Web.Administration.dll" target="lib\net46" />
       <file src="LICENSE" />
    </files>
 </package>
