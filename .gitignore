@@ -81,3 +81,6 @@ src/TestResults/
 Thumbs.db
 
 src/*/wwwroot/version.txt
+
+# Cake specific
+!tools/packages.config
