@@ -7,7 +7,6 @@
 
 # Build related
 build/results/
-tools/
 test/tools/
 node_modules/
 
@@ -83,4 +82,5 @@ Thumbs.db
 src/*/wwwroot/version.txt
 
 # Cake specific
+tools/**
 !tools/packages.config
