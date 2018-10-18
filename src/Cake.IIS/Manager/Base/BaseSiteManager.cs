@@ -414,7 +414,8 @@ namespace Cake.IIS
 
                 //Get Directory
                 VirtualDirectory vDir = app.VirtualDirectories.CreateElement();
-                vDir.Path = settings.VirtualDirectory;
+                // While creating application only ApplicationPath is used by IIS, so we leave default one here.
+                vDir.Path = "/";
                 vDir.PhysicalPath = this.GetPhysicalDirectory(settings);
 
                 app.VirtualDirectories.Add(vDir);
