@@ -145,7 +145,6 @@ namespace Cake.IIS.Tests
             {
                 ApplicationPath = "/Test",
                 ApplicationPool = CakeHelper.GetAppPoolSettings().Name,
-                VirtualDirectory = "/",
                 PhysicalDirectory = "./Test/App/",
                 SiteName = name,
             };
