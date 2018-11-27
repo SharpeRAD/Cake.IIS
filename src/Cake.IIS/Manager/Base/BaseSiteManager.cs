@@ -124,6 +124,14 @@ namespace Cake.IIS
                 binding.CertificateStoreName = settings.Binding.CertificateStoreName;
             }
 
+            if (settings.Binding.RequireServerNameIndication)
+            {
+                if (!string.Equals(settings.Binding.BindingProtocol.ToString(), BindingProtocol.Https.ToString(), StringComparison.Ordinal))
+                    throw new Exception("Require Server Name Indication (SNI) is only applicable for HTTPS bindings");
+
+                binding.SslFlags |= SslFlags.Sni;
+            }
+
             site.Bindings.Add(binding);
 
             site.ServerAutoStart = settings.ServerAutoStart;
@@ -292,6 +300,14 @@ namespace Cake.IIS
                 if (!String.IsNullOrEmpty(settings.CertificateStoreName))
                 {
                     newBinding.CertificateStoreName = settings.CertificateStoreName;
+                }
+
+                if (settings.RequireServerNameIndication)
+                {
+                    if (!string.Equals(settings.BindingProtocol.ToString(), BindingProtocol.Https.ToString(), StringComparison.Ordinal))
+                        throw new Exception("Require Server Name Indication (SNI) is only applicable for HTTPS bindings");
+
+                    newBinding.SslFlags |= SslFlags.Sni;
                 }
 
                 site.Bindings.Add(newBinding);

@@ -64,5 +64,17 @@
             binding.CertificateHash = certificateHash;
             return binding;
         }
+
+        /// <summary>
+        /// Specifies whether or not Server Name Indication (SNI) is required.
+        /// </summary>
+        /// <param name="binding">The binding.</param>
+        /// <param name="requireServerNameIndication">Whether or not Server Name Indication should be required</param>
+        /// <returns>The same <see cref="BindingSettings"/> instance so that multiple calls can be chained.</returns>
+        public static BindingSettings RequireServerNameIndication(this BindingSettings binding, bool requireServerNameIndication)
+        {
+            binding.RequireServerNameIndication = requireServerNameIndication;
+            return binding;
+        }
     }
 }
