@@ -44,7 +44,6 @@ Task("Build")
 	var buildSettings = new DotNetCoreMSBuildSettings
 	{
 		Verbosity = DotNetCoreVerbosity.Normal,
-		TreatAllWarningsAs = Cake.Common.Tools.DotNetCore.MSBuild.MSBuildTreatAllWarningsAs.Error,
 
 		MaxCpuCount = 3
 	};
