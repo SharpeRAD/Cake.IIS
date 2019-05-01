@@ -10,14 +10,13 @@
         <summary>IIS addon for cake build.</summary>
         <licenseUrl>https://github.com/SharpeRAD/Cake.IIS/LICENSE</licenseUrl>
         <projectUrl>https://github.com/SharpeRAD/Cake.IIS</projectUrl>
-        <iconUrl>https://cdn.rawgit.com/cake-contrib/graphics/a5cf0f881c390650144b2243ae551d5b9f836196/png/cake-contrib-medium.png</iconUrl>
+        <iconUrl>https://cdn.jsdelivr.net/gh/cake-contrib/graphics/png/cake-contrib-medium.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <copyright>Copyright (c) Sergio Silveira, Phillip Sharpe 2015</copyright>
         <releaseNotes>Initial Release</releaseNotes>
         <tags>Cake Script Build IIS</tags>
 
         <dependencies>
-            <dependency id="Cake.Core" version="0.29.0" />
             <dependency id="Microsoft.Web.Administration" version="11.1.0" />
             
             <dependency id="Microsoft.Win32.Registry" version="4.0.0" />

@@ -8,6 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{44AEA5A8
 		..\.gitignore = ..\.gitignore
 		..\appveyor.yml = ..\appveyor.yml
 		..\build.cake = ..\build.cake
+		..\cake.config = ..\cake.config
 		..\install.ps1 = ..\install.ps1
 	EndProjectSection
 EndProject
@@ -31,9 +32,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{58FFCB7E
 		..\test\build.cake = ..\test\build.cake
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cake.IIS", "Cake.IIS\Cake.IIS.csproj", "{07CC5C10-FD48-4752-868F-D7D8FB2FEBD2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cake.IIS", "Cake.IIS\Cake.IIS.csproj", "{07CC5C10-FD48-4752-868F-D7D8FB2FEBD2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cake.IIS.Tests", "Cake.IIS.Tests\Cake.IIS.Tests.csproj", "{299476FA-FA90-4837-A324-AE2FC4766608}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cake.IIS.Tests", "Cake.IIS.Tests\Cake.IIS.Tests.csproj", "{299476FA-FA90-4837-A324-AE2FC4766608}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
