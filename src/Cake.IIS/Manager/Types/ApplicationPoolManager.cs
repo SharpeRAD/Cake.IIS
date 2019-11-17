@@ -377,10 +377,10 @@ namespace Cake.IIS
         {
             if (ApplicationPoolBlackList.Contains(name))
             {
+                _Log.Information("Application pool '{0}' is system's default.", name);
                 return true;
             }
 
-            _Log.Information("Application pool '{0}' is system's default.", name);
             return false;
         }
         #endregion
