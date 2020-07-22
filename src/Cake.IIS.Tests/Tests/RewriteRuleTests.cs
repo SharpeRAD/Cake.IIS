@@ -11,7 +11,7 @@ namespace Cake.IIS.Tests
 {
     public class RewriteRuleTests
     {
-        [Fact]
+        [Fact(Skip = "https://forums.iis.net/t/1200296.aspx")]
         public void Should_Create_Delete_RewriteRule()
         {
             // Arrange
