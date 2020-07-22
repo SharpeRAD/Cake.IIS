@@ -17,3 +17,5 @@ jobs:
         dotnet-version: 3.1.x
     - name: Cake Action
       uses: cake-build/cake-action@v1.1.1
+      with:
+        target: Skip-Test 
