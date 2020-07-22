@@ -18,4 +18,4 @@ jobs:
     - name: Cake Action
       uses: cake-build/cake-action@v1.1.1
       with:
-        target: Skip-Test 
+        target: Publish-Without-Tests
