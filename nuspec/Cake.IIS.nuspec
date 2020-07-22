@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
-        <id>Cake.IIS</id>
+        <id>Cake.IIS.NetCore</id>
         <version>0.0.0</version>
-        <authors>Sergio Silveira, Phillip Sharpe</authors>
-        <owners>Sergio Silveira, Phillip Sharpe</owners>
-        <title>Cake.IIS</title>
-        <description>Cake Build addon for IIS.</description>
+        <authors>Nikita Rukavkov, Alexander Salamatov</authors>
+        <owners>Nikita Rukavkov, Alexander Salamatov</owners>
+        <title>Cake.IIS - Net Core</title>
+        <description>Cake Build addon for IIS - Net Core Version.</description>
         <summary>IIS addon for cake build.</summary>
-        <licenseUrl>https://github.com/SharpeRAD/Cake.IIS/LICENSE</licenseUrl>
-        <projectUrl>https://github.com/SharpeRAD/Cake.IIS</projectUrl>
+        <licenseUrl>https://github.com/appulate/Cake.IIS/LICENSE</licenseUrl>
+        <projectUrl>https://github.com/appulate/Cake.IIS</projectUrl>
         <iconUrl>https://cdn.jsdelivr.net/gh/cake-contrib/graphics/png/cake-contrib-medium.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <copyright>Copyright (c) Sergio Silveira, Phillip Sharpe 2015</copyright>
-        <releaseNotes>Initial Release</releaseNotes>
-        <tags>Cake Script Build IIS</tags>
+        <copyright>Copyright (c) Nikita Rukavkov, Alexander Salamatov 2020</copyright>
+        <releaseNotes>The project has been migrated to Net Core</releaseNotes>
+        <tags>Cake Script Build IIS Appulate</tags>
 
         <dependencies>
             <dependency id="Microsoft.Web.Administration" version="11.1.0" />
