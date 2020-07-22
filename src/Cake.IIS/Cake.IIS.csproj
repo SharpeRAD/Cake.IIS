@@ -5,7 +5,7 @@
         <PackageId>Cake.IIS</PackageId>
         <OutputType>Library</OutputType>
 
-        <TargetFrameworks>net461;netstandard2.0;</TargetFrameworks>
+        <TargetFrameworks>netstandard2.1;</TargetFrameworks>
 
         <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
         <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
@@ -20,7 +20,6 @@
 
     <ItemGroup>
         <PackageReference Include="Cake.Core" Version="0.33.0" PrivateAssets="All" />
-
         <PackageReference Include="Microsoft.Web.Administration" Version="11.1.0" />
     </ItemGroup>
 </Project>
