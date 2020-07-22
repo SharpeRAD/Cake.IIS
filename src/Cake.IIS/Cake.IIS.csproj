@@ -18,6 +18,14 @@
         <DocumentationFile>bin\Debug\net461\Cake.IIS.xml</DocumentationFile>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <WarningLevel>0</WarningLevel>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <WarningLevel>0</WarningLevel>
+    </PropertyGroup>
+
     <ItemGroup>
         <PackageReference Include="Cake.Core" Version="0.38.4" PrivateAssets="All" />
 
