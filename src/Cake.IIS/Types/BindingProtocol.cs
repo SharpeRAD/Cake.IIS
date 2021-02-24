@@ -1,5 +1,5 @@
 ﻿#region Using Statements
-using System;
+
 #endregion
 
 
@@ -79,7 +79,7 @@ namespace Cake.IIS
         private string Name { get; set; }
 
 
-
+        /// <inheritdoc cref="ToString"/>
         public override string ToString()
         {
             return this.Name;
