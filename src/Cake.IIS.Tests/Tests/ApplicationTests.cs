@@ -14,6 +14,7 @@ namespace Cake.IIS.Tests
     public class ApplicationTests
     {
         [Fact]
+        [TestDependency(nameof(Should_Create_Application_Without_DirectoryBrowsing_In_Settings))]
         public void Should_Create_Application()
         {
             // Arrange
@@ -35,6 +36,7 @@ namespace Cake.IIS.Tests
         }
 
         [Fact]
+        [TestDependency(nameof(Should_Create_Application_Without_DirectoryBrowsing_In_Settings))]
         public void Should_Create_Application_With_Predefined_EnabledProtocols()
         {
             // Arrange
@@ -60,6 +62,7 @@ namespace Cake.IIS.Tests
         }
 
         [Fact]
+        [TestDependency(nameof(Should_Create_Application_Without_DirectoryBrowsing_In_Settings))]
         public void Should_Create_Application_With_DirectoryBrowsing()
         {
             // Arrange
@@ -83,6 +86,7 @@ namespace Cake.IIS.Tests
         }
 
         [Fact]
+        [TestDependency(nameof(Should_Create_Application_Without_DirectoryBrowsing_In_Settings))]
         public void Should_Create_Application_Without_DirectoryBrowsing()
         {
             // Arrange
