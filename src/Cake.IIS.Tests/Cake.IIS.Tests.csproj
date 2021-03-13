@@ -27,6 +27,8 @@
         <PackageReference Include="Microsoft.Web.Administration" Version="11.1.0" />
 
         <PackageReference Include="xunit" Version="2.4.1" />
+
+        <PackageReference Include="Xunit.Extensions.TestDependency" Version="1.0.0" />
         <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -34,6 +36,6 @@
         <PackageReference Include="Shouldly" Version="4.0.3" />
         <PackageReference Include="NSubstitute" Version="4.2.2" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.1" />
-        <PackageReference Include="XunitXml.TestLogger" Version="3.0.62" />
+        <PackageReference Include="XunitXml.TestLogger" Version="3.0.66" />
     </ItemGroup>
 </Project>

@@ -9,6 +9,8 @@
 
 	    <GenerateDocumentationFile>true</GenerateDocumentationFile>
 
+	    <NoWarn>$(NoWarn);1591;</NoWarn>
+
         <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
         <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
         <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>

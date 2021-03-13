@@ -2,12 +2,15 @@
 
 using Xunit;
 using Shouldly;
+using Xunit.Extensions.TestDependency;
+
 #endregion
 
 
 
 namespace Cake.IIS.Tests
 {
+    [TestCaseOrderer(DependencyOrderer.TypeName, DependencyOrderer.AssemblyName)]
     public class ApplicationTests
     {
         [Fact]
@@ -103,6 +106,7 @@ namespace Cake.IIS.Tests
         }
 
         [Fact]
+        [TestDependency(nameof(Should_Create_Application_Without_DirectoryBrowsing_In_Settings))]
         public void Should_Create_Application_With_DirectoryBrowsing_In_Settings()
         {
             // Arrange
