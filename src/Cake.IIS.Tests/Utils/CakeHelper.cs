@@ -426,7 +426,14 @@ namespace Cake.IIS.Tests
 
         public static void CreateWebConfig(IDirectorySettings settings)
         {
-            var folder = Directory.GetCurrentDirectory().Replace("\\", "/").Replace("/bin/Debug/net461", "/") + settings.PhysicalDirectory.FullPath;
+#if NET461
+            var framework = "net461";
+#elif NETCOREAPP3_1
+            var framework = "netcoreapp3.1";
+#elif NET5_0
+            var framework = "net5.0";
+#endif
+            var folder = Directory.GetCurrentDirectory().Replace("\\", "/").Replace($"/bin/Debug/{framework}", "/") + settings.PhysicalDirectory.FullPath;
 
             // Make sure the directory exists (for configs)
             Directory.CreateDirectory(folder);
