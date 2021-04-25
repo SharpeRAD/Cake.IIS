@@ -14,7 +14,7 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <copyright>Copyright (c) Sergio Silveira, Phillip Sharpe 2015</copyright>
         <releaseNotes>Initial Release</releaseNotes>
-        <tags>Cake Script Build IIS</tags>
+        <tags>Cake cake-addin Script Build IIS</tags>
 
         <dependencies>
             <dependency id="Microsoft.Web.Administration" version="11.1.0" />

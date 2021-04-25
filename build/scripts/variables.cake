@@ -2,7 +2,7 @@
 // VARIABLES
 //////////////////////////////////////////////////////////////////////
 
-//Setup
+// Setup
 var tools = EnvironmentVariable("CAKE_PATHS_TOOLS");
 var username = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile).ToLower().Replace(@"c:\users\", "").Replace(@"c:\windows\serviceprofiles\", "");
 
@@ -46,8 +46,7 @@ var projectFiles = new List<FilePath>();
 
 foreach (string project in projectNames)
 {
-    //Exclude Legacy projects without namespaces
-    if (project.Contains(".") && DirectoryExists("./src/" + project))
+    if (DirectoryExists("./src/" + project))
     {
         projectDirs.Add("./src/" + project);
 
@@ -60,7 +59,7 @@ foreach (string project in projectNames)
 
 
 
-//Find Tests
+// Find Tests
 var testNames = new List<string>();
 
 if (DirectoryExists("./src/" + appName + ".Tests"))

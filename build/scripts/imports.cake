@@ -2,12 +2,10 @@
 // IMPORTS
 //////////////////////////////////////////////////////////////////////
 
-#addin nuget:?package=Cake.AWS.S3
+#addin nuget:?package=Cake.FileHelpers&version=3.3.0
+#addin nuget:?package=Cake.Slack&version=1.0.0
 
-#addin nuget:?package=Cake.FileHelpers
-#addin nuget:?package=Cake.Slack
-
-#tool nuget:?package=ReportUnit
+#tool nuget:?package=ReportUnit&version=1.2.1
 
 
 

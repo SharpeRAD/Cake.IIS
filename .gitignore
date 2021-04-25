@@ -7,7 +7,8 @@
 
 # Build related
 build/results/
-tools/
+tools/**
+!tools/packages.config
 test/tools/
 node_modules/
 
@@ -64,7 +65,7 @@ _NCrunch_*
 
 
 # Visual Studio Directory
-src/.vs/
+.vs/
 project.lock.json
 
 SolutionInfo.cs
