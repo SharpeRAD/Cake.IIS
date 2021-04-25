@@ -5,7 +5,11 @@
         <PackageId>Cake.IIS</PackageId>
         <OutputType>Library</OutputType>
 
-        <TargetFrameworks>net461;netstandard2.0;</TargetFrameworks>
+        <TargetFrameworks>net461;netstandard2.0;net5.0</TargetFrameworks>
+
+	    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+	    <NoWarn>$(NoWarn);1591;</NoWarn>
 
         <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
         <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
@@ -14,13 +18,8 @@
         <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
     </PropertyGroup>
 
-    <PropertyGroup>
-        <DocumentationFile>bin\Debug\net461\Cake.IIS.xml</DocumentationFile>
-    </PropertyGroup>
-
     <ItemGroup>
-        <PackageReference Include="Cake.Core" Version="0.33.0" PrivateAssets="All" />
-
+        <PackageReference Include="Cake.Core" Version="1.0.0" PrivateAssets="All" />
         <PackageReference Include="Microsoft.Web.Administration" Version="11.1.0" />
     </ItemGroup>
 </Project>

@@ -1,8 +1,8 @@
 ﻿#region Using Statements
-using System;
 
 using Xunit;
 using Shouldly;
+
 #endregion
 
 
