@@ -188,7 +188,6 @@ Task("Application-Create")
         SiteName = "Default Website",
 
         ApplicationPath = "/NestedApp",
-		VirtualDirectory = "/NestedApp",
         PhysicalDirectory = "C:/Apps/KillerApp/"
     });
 });
@@ -202,7 +201,6 @@ Task("Application-Remove")
         SiteName = "Default Website",
 
         ApplicationPath = "/NestedApp",
-		VirtualDirectory = "/NestedApp",
         PhysicalDirectory = "C:/Apps/KillerApp/"
     });
 });
